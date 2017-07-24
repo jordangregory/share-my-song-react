@@ -34,6 +34,7 @@ class App extends Component {
   };
 
   handleAddToList = newTrack => {
+    newTrack = JSON.stringify(newTrack);
     fetch("https://tiny-lasagna-server.herokuapp.com/collections/playlisting", {
       method: "POST",
       body: newTrack,
