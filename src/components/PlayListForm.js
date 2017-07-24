@@ -4,56 +4,82 @@ export default class PlayListForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      newTrack: {}
+      newTrack: {
+        userName: "",
+        songArtist: "",
+        songTitle: "",
+        songNotes: ""
+      }
     };
   }
+
+  updateNewTrack = e => {
+    console.log("e: ", e.target.value);
+
+    let newTrack = this.state.newTrack;
+    newTrack[e.target.name] = e.target.value;
+    this.setState({ newTrack }, () => {
+      console.log(this.state.newTrack);
+    });
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+    this.props.onSubmit(this.state.newTrack);
+    this.setState({
+      newTrack: {
+        userName: "",
+        songArtist: "",
+        songTitle: "",
+        songNotes: ""
+      }
+    });
+  };
 
   render() {
     return (
       <div className="PlayListForm">
         <form className="fieldForm">
           <label>Username: </label>
-          <input type="text" name="userName" onKeyUp={this.updateNewTrack} />
+          <input
+            className="formInputs"
+            type="text"
+            name="userName"
+            onChange={this.updateNewTrack}
+            value={this.state.newTrack.userName}
+          />
           <label>Artist/Band: </label>
-          <input type="text" name="songArtist" onKeyUp={this.updateNewTrack} />
+          <input
+            className="formInputs"
+            type="text"
+            name="songArtist"
+            onChange={this.updateNewTrack}
+            value={this.state.newTrack.songArtist}
+          />
           <label>Song Title: </label>
-          <input type="text" name="singTitle" onKeyUp={this.updateNewTrack} />
+          <input
+            className="formInputs"
+            type="text"
+            name="songTitle"
+            onChange={this.updateNewTrack}
+            value={this.state.newTrack.songTitle}
+          />
           <label>Notes about Song: </label>
-          <input type="text" name="songNotes" onKeyUp={this.updateNewTrack} />
+          <input
+            className="formInputs"
+            type="text"
+            name="songNotes"
+            onChange={this.updateNewTrack}
+            value={this.state.newTrack.songNotes}
+          />
+          <input
+            className="formInputs"
+            type="button"
+            value="Submit"
+            onClick={this.onSubmit}
+          />
         </form>
-        <input type="button" value="Submit" onClick={this.addToList} />
       </div>
     );
   }
-
-  updateNewTrack = e => {
-    let newTrack = this.state.newTrack;
-    newTrack[e.target.name] = e.target.value;
-    this.setState({ newTrack });
-  };
-
-  addToList = e => {
-    e.preventDefault();
-
-    fetch("https://tiny-lasagna-server.herokuapp.com/collections/playlisting", {
-      method: "POST",
-      body: this.state.newTrack,
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => {
-        console.log(response, "booh yah!");
-      })
-      .catch(err => {
-        console.log(err, "boo, you suck!");
-      });
-    this.setState({
-      userName: "",
-      songNotes: "",
-      songArtist: "",
-      songTitle: ""
-    });
-  };
 }

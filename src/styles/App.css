@@ -9,45 +9,63 @@
   padding: 20px;
   color: white;
   text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 .headerTitle {
   margin-top: 25px;
   font-size: 50px;
 }
+/*App.js*/
+
+.listAndForm {
+  display: flex;
+  justify-content: space-around;
+}
 
 .PlayListForm {
-  padding: 30px;
   justify-content: center;
+  width: 50%;
+  padding: 1rem;
 }
 
 .fieldForm {
   display: flex;
   flex-direction: column;
   color: white;
-  padding: 0 50px 0 50px;
-  margin: 50px;
-  justify-content: center;
 }
 
+.formInputs {
+  margin: 10px;
+  padding: 10px;
+}
+
+.updatedListContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.songsHolder {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
 /* PlayListItem */
 
-.dataContainer {
-  display: inline-block;
-}
 .returnedData {
   background-color: #7fb9e8;
-  margin: 25px;
+  margin: 10px;
   border-radius: 3%;
   color: white;
   padding: 10px;
-  width: 250px;
-  display: flex;
+  width: 200px;
+  text-align: left;
+  /* display: flex; */
 }
-.itemFields {
-  display: flex;
-  flex-direction: column;
-}
+
+/*Logo*/
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
@@ -58,9 +76,6 @@
   font-size: large;
 }
 
-.returnedData {
-  display: flex;
-}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
